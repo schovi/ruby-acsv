@@ -63,8 +63,7 @@ module ACSV
       options.delete :confidence
       options.delete :method
       # to superclass
-      args << options
-      super(*args)
+      super(*args, **options)
     end
   end
 end
