@@ -41,8 +41,10 @@ module ACSV
       full_mode = args[1] || 'rb'
       mode, ext_enc, int_enc = full_mode.split(':')
       if (ext_enc.nil? || ext_enc=='') && options[:encoding].nil? && options[:external_encoding].nil?
+        file = File.open(args[0], mode)
+        
         # try to detect encoding
-        if ext_enc = ACSV::Detect.encoding(File.open(args[0], mode, options), options)
+        if ext_enc = ACSV::Detect.encoding(file, options)
           # workaround for http://stackoverflow.com/a/20723346
           ext_enc = "BOM|#{ext_enc}" if ext_enc =~ /UTF/
           # create new mode specification if there was one, else store in option
