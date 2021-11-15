@@ -13,12 +13,12 @@ module ACSV
     # In case of reading, the character separator is auto-detected (unless given as an option).
     #
     # @see http://www.ruby-doc.org/stdlib/libdoc/csv/rdoc/CSV.html#method-c-new
-    def initialize(data, options = Hash.new)
+    def initialize(data, **options)
       if !options.key?(:col_sep) && (separator = ACSV::Detect.separator(data))
         options[:col_sep] = separator
       end
 
-      super(data, options)
+      super(data, **options)
     end
 
     # This method opens an IO object, and wraps that with CSV. For reading, separator
